@@ -1,7 +1,4 @@
-:BaseCommonContoller
-
 There are many ways of using multiple models in a view, most frequently used are given below:
-
 Dynamic
 ViewData
 ViewBag
