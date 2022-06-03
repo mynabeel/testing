@@ -6,10 +6,7 @@ PartialView
 ViewModel
 Tuple
 
-
-
-
-ايالالللايلايبلايبلاب
+===============================
 @using PAMWebApp.Models;
 @model Tuple<LoginViewModel,RegisterViewModel>
 
