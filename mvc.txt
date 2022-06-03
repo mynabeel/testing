@@ -1,0 +1,97 @@
+:BaseCommonContoller
+
+There are many ways of using multiple models in a view, most frequently used are given below:
+
+Dynamic
+ViewData
+ViewBag
+PartialView
+ViewModel
+Tuple
+
+@using PAMWebApp.Models;
+@model Tuple<LoginViewModel,RegisterViewModel>
+
+  @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "login-form", role = "form", style = "display: block;", }))
+     {
+     <div class="form-group">
+     @Html.TextBoxFor(m => m.Item1.UserName, new { @class = "form-control", id = "username", name = "username", type = "text", placeholder = "Username", tabIndex = 1 })
+     </div>
+
+     <div class="form-group">
+      @Html.TextBoxFor(m => m.Item1.Password, new { @class = "form-control", type = "password", id = "password", name = "pass", placeholder = "Password", tabindex = 2 })
+    </div>
+
+    <div class="form-group">
+     <div class="row">
+       <div class="col-sm-6 col-sm-offset-3">
+          <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+      </div>
+       </div>
+       </div>
+ }
+
+
+[HttpPost]
+    [AllowAnonymous]
+    public ActionResult Login(LoginViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            string name = model.UserName;
+            string pwd = model.Password;
+        }
+     }
+
+
+public class LoginViewModel
+    {
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+    }
+
+    public class RegisterViewModel
+    {
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
+
+
+public class MemberModel{
+    public LoginViewModel LoginModel { get; set; }
+    public RegisterViewModel RegisterModel { get; set; }
+    //add more properties here if necessary
+}
+
+@model PAMWebApp.Models.MemberModel 
+
+There are many ways of using multiple models in a view, most frequently used are given below:
+
+Dynamic
+ViewData
+ViewBag
+PartialView
+ViewModel
+Tuple
